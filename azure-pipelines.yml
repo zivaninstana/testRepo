@@ -22,7 +22,16 @@ jobs:
                     Write-Host "##vso[task.setvariable variable=foo;]bar"
         name: setvarStep
       - powershell: 
-                    Write-Host "The value of project_name is $env:foo"  
+                    $foo = $env:foo
+                    if ( "bar" -eq $foo )
+                    {
+                        Write-Output "The condition was true"
+                        Write-Host "The value of project_name is $env:foo"  
+                    }
+                    else
+                    {
+                      Write-Output "The condition was false"
+                    }
       - script: echo $(setvarStep.testVar)
         name: echovar
 
