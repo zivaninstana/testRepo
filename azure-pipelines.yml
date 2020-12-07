@@ -16,6 +16,8 @@ jobs:
   - job: Test_Job
     displayName: Test_Job
     steps:
+      - script: echo $(testVar)
+        name: testvar
       - powershell: echo "##vso[task.setvariable variable=testVar;isOutput=true]this is the value"
         name: setvarStep
       - script: echo $(setvarStep.testVar)
