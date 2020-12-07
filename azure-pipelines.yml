@@ -25,7 +25,8 @@ jobs:
                     if ( $env:foo -eq 'bar' )
                     {
                         Write-Output "The condition was true"
-                        Write-Host "The value of project_name is $env:foo"  
+                        Write-Host "The value of project_name is $env:foo" 
+                        exit 1 
                     }
                     else
                     {
