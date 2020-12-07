@@ -9,9 +9,9 @@ trigger:
 pool: Default
 
 variables: 
- -testVar: yes
-parameters:
-   - name: testParam
+ -name: testVar
+  value: "tteesstt"
+
 jobs:
   - job: Test_Job
     displayName: Test_Job
