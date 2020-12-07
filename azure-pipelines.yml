@@ -6,14 +6,18 @@
 trigger:
 - main
 
-pool:
-  vmImage: 'ubuntu-latest'
+pool: Default
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+variables: 
+ -testVar: yes
+parameters:
+   - name: testParam
+jobs:
+  - job: Test_Job
+    displayName: Test_Job
+    steps:
+      - powershell: echo "##vso[task.setvariable variable=testVar;isOutput=true]this is the value"
+        name: setvarStep
+      - script: echo $(setvarStep.testVar)
+        name: echovar
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
