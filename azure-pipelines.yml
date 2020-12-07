@@ -21,17 +21,19 @@ jobs:
       - powershell: echo "##vso[task.setvariable variable=testVar;isOutput=true]this is the value"
                     Write-Host "##vso[task.setvariable variable=foo;]bar"
         name: setvarStep
-      - powershell: 
-                    $foo = $env:foo
-                    if ( "bar" -eq $foo )
-                    {
-                        Write-Output "The condition was true"
-                        Write-Host "The value of project_name is $env:foo"  
-                    }
-                    else
-                    {
-                      Write-Output "The condition was false"
-                    }
+        ${{ if eq(variables['foo'], 'bar') }}:
+          - powershell: 
+                        # $foo = $env:foo
+                        # if ( "bar" -eq $foo )
+                        # {
+                        #     Write-Output "The condition was true"
+                        #     Write-Host "The value of project_name is $env:foo"  
+                        # }
+                        # else
+                        # {
+                        #   Write-Output "The condition was false"
+                        # }
+                        exit 1
       - script: echo $(setvarStep.testVar)
         name: echovar
 
